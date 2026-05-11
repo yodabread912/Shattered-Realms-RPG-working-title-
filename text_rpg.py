@@ -1,10 +1,12 @@
 import random
 from dataclasses import dataclass
 
+MAX_PLAYER_HP = 20
+
 
 @dataclass
 class GameState:
-    player_hp: int = 20
+    player_hp: int = MAX_PLAYER_HP
     enemy_hp: int = 15
     potions: int = 2
 
@@ -25,7 +27,7 @@ def use_potion(state: GameState) -> bool:
     if state.potions <= 0:
         return False
     state.potions -= 1
-    state.player_hp = min(20, state.player_hp + 6)
+    state.player_hp = min(MAX_PLAYER_HP, state.player_hp + 6)
     return True
 
 

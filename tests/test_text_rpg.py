@@ -41,6 +41,15 @@ class TestTextRpg(unittest.TestCase):
         self.assertEqual(state.player_hp, 10)
         self.assertEqual(state.potions, 0)
 
+    def test_use_potion_caps_at_max_hp(self):
+        state = GameState(player_hp=18, potions=1)
+
+        used = use_potion(state)
+
+        self.assertTrue(used)
+        self.assertEqual(state.player_hp, 20)
+        self.assertEqual(state.potions, 0)
+
     def test_winner_player(self):
         state = GameState(enemy_hp=0)
         self.assertEqual(winner(state), "player")
@@ -48,6 +57,10 @@ class TestTextRpg(unittest.TestCase):
     def test_winner_enemy(self):
         state = GameState(player_hp=0)
         self.assertEqual(winner(state), "enemy")
+
+    def test_winner_none_when_battle_active(self):
+        state = GameState(player_hp=5, enemy_hp=5)
+        self.assertIsNone(winner(state))
 
 
 if __name__ == "__main__":
