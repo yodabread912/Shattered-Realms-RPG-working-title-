@@ -53,7 +53,7 @@ def run_game() -> None:
         if action == "q":
             print("You retreat from battle.")
             return
-        if action == "a":
+        elif action == "a":
             damage = player_attack(state, rng)
             print(f"You strike for {damage} damage!")
         elif action == "h":

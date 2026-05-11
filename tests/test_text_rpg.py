@@ -10,8 +10,7 @@ class TestTextRpg(unittest.TestCase):
         rng = random.Random(1)
         damage = player_attack(state, rng)
 
-        self.assertGreaterEqual(damage, 3)
-        self.assertLessEqual(damage, 7)
+        self.assertEqual(damage, 4)
         self.assertEqual(state.enemy_hp, 10 - damage)
 
     def test_enemy_attack_reduces_player_hp(self):
@@ -19,8 +18,7 @@ class TestTextRpg(unittest.TestCase):
         rng = random.Random(2)
         damage = enemy_attack(state, rng)
 
-        self.assertGreaterEqual(damage, 2)
-        self.assertLessEqual(damage, 6)
+        self.assertEqual(damage, 2)
         self.assertEqual(state.player_hp, 10 - damage)
 
     def test_use_potion_heals_and_spends(self):
