@@ -50,20 +50,21 @@ def run_game() -> None:
         print(f"\nYour HP: {state.player_hp} | Enemy HP: {state.enemy_hp} | Potions: {state.potions}")
         action = input("Choose action: [A]ttack, [H]eal, [Q]uit: ").strip().lower()
 
+        if action not in {"a", "h", "q"}:
+            print("Invalid action. Please choose A, H, or Q.")
+            continue
+
         if action == "q":
             print("You retreat from battle.")
             return
         elif action == "a":
             damage = player_attack(state, rng)
             print(f"You strike for {damage} damage!")
-        elif action == "h":
+        else:
             if use_potion(state):
                 print("You drink a potion and recover 6 HP.")
             else:
                 print("No potions left!")
-        else:
-            print("Invalid action.")
-            continue
 
         result = winner(state)
         if result == "player":
